@@ -12,7 +12,7 @@
     body { font-family: 'Jost', sans-serif; background: var(--white); color: var(--ink); font-weight: 300; letter-spacing: 0.02em; overflow-x: hidden; }
 
     header { position: fixed; top: 0; left: 0; right: 0; z-index: 100; background: rgba(255,255,255,0.96); backdrop-filter: blur(8px); display: flex; flex-direction: column; align-items: center; padding: 22px 40px 14px; border-bottom: 1px solid var(--light); }
-    .sig img { height: 120px; width: auto; display: block; filter: invert(1); opacity: 0.85; margin-bottom: 10px; }
+    .sig img { height: 120px; width: auto; display: block; mix-blend-mode: multiply; opacity: 0.88; margin-bottom: 10px; }
     nav { display: flex; gap: 48px; }
     nav a { font-family: 'Jost', sans-serif; font-weight: 200; font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--accent); text-decoration: none; transition: color 0.25s; }
     nav a:hover, nav a.active { color: var(--ink); }
@@ -231,7 +231,7 @@
 
 <script>
   const SERIES = {
-    'lucas-home':    { imgs: Array.from({length:19},(_,i)=>`images/lucas-home-${i+1}.jpg`) },
+    'lucas-home':    { imgs: ['images/lucas-home-1.jpg','images/lucas-home-2.jpg','images/lucas-home-3.jpg','images/lucas-home-4.jpg','images/lucas-home-5.jpg','images/lucas-home-6.jpg','images/lucas-home-7.jpg','images/lucas-home-8.jpg','images/lucas-home-9.jpg','images/lucas-home-10.jpg','images/lucas-home-11.jpg','images/lucas-home-12.jpg','images/lucas-home-13.jpg','images/lucas-home-14.jpg','images/lucas-home-15.jpg','images/lucas-home-16.jpg','images/lucas-home-17.jpg','images/lucas-home-18.jpg','images/lucas-home-19.jpg'] },
     'sailing-club':  { imgs: [] },
     'hernan':        { imgs: Array.from({length:5},(_,i)=>`images/hernan-${i+1}.jpg`) },
     'sonder':        { imgs: [] },

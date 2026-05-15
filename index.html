@@ -48,7 +48,6 @@
     .lb.open { display: flex; }
     .lb-inner { position: relative; width: 88vw; max-width: 980px; }
     .lb-inner img { width: 100%; max-height: 78vh; object-fit: contain; display: block; }
-    .lb-inner img.rotate90 { transform: rotate(90deg); max-height: 55vw; width: auto; margin: 0 auto; display: block; }
     .lb-close { position: absolute; top: -42px; right: 0; color: var(--mid); font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; cursor: pointer; border: none; background: none; }
     .lb-close:hover { color: white; }
     .lb-nav { display: flex; gap: 32px; margin-top: 18px; }
@@ -252,9 +251,7 @@
   function updateLb() {
     const img = document.getElementById('lb-img');
     img.src = curImgs[curIdx];
-    // Rotate landscape artists images
-    const rotated = ['images/artists-10.jpg','images/artists-11.jpg'];
-    img.className = rotated.includes(curImgs[curIdx]) ? 'rotate90' : '';
+    img.className = '';
     document.getElementById('lb-count').textContent = `${curIdx+1} / ${curImgs.length}`;
   }
   function nextImg() { curIdx = (curIdx+1) % curImgs.length; updateLb(); }

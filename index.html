@@ -12,7 +12,8 @@
     body { font-family: 'Jost', sans-serif; background: var(--white); color: var(--ink); font-weight: 300; letter-spacing: 0.02em; overflow-x: hidden; }
 
     header { position: fixed; top: 0; left: 0; right: 0; z-index: 100; background: rgba(255,255,255,0.96); backdrop-filter: blur(8px); display: flex; flex-direction: column; align-items: center; padding: 22px 40px 14px; border-bottom: 1px solid var(--light); }
-    .sig img { height: 120px; width: auto; display: block; mix-blend-mode: multiply; opacity: 0.88; margin-bottom: 10px; }
+    .sig { background: white; }
+    .sig img { height: 120px; width: auto; display: block; mix-blend-mode: multiply; margin-bottom: 10px; }
     nav { display: flex; gap: 48px; }
     nav a { font-family: 'Jost', sans-serif; font-weight: 200; font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--accent); text-decoration: none; transition: color 0.25s; }
     nav a:hover, nav a.active { color: var(--ink); }
@@ -48,7 +49,7 @@
     .lb.open { display: flex; }
     .lb-inner { position: relative; width: 88vw; max-width: 980px; }
     .lb-inner img { width: 100%; max-height: 78vh; object-fit: contain; display: block; }
-    .lb-inner img.rotate90 { transform: scaleX(-1); }
+    .lb-inner img.rotate90 { transform: rotate(90deg); max-height: 55vw; width: auto; margin: 0 auto; display: block; }
     .lb-close { position: absolute; top: -42px; right: 0; color: var(--mid); font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; cursor: pointer; border: none; background: none; }
     .lb-close:hover { color: white; }
     .lb-nav { display: flex; gap: 32px; margin-top: 18px; }
@@ -93,7 +94,7 @@
 
 <header>
   <div class="sig">
-    <img src="SHIVANI_LOGO-removebg-preview.png" alt="Shivani Manoj" />
+    <img src="images/SHIVANI_LOGO-removebg-preview.png" alt="Shivani Manoj" />
   </div>
   <nav>
     <a href="#" onclick="showPage('portfolio')" id="nav-portfolio" class="active">Portfolio</a>
@@ -156,12 +157,12 @@
         </div>
         <div class="grid">
           <div class="card" onclick="openLb('identity')">
-            <div class="card-img"><img src="images/identity-1.jpg.jpg" alt="Identity"/><div class="card-overlay"><span class="view-lbl">View Series</span></div></div>
+            <div class="card-img"><img src="images/identity-1.jpg" alt="Identity"/><div class="card-overlay"><span class="view-lbl">View Series</span></div></div>
             <div class="card-name">Identity</div>
             <p class="card-desc">My first exhibition at ELISAVA. I chose to explore identity through the stages of a man's life — showing how each phase gradually shapes who he becomes. Rather than presenting identity as something fixed, I approached it as something evolving, formed through time, experience, and transition.</p>
           </div>
           <div class="card" onclick="openLb('mothers-touch')">
-            <div class="card-img"><img src="images/mothers-touch-1.jpg.jpg" alt="Mother's Touch"/><div class="card-overlay"><span class="view-lbl">View Series</span></div></div>
+            <div class="card-img"><img src="images/mothers-touch-1.jpg" alt="Mother's Touch"/><div class="card-overlay"><span class="view-lbl">View Series</span></div></div>
             <div class="card-name">Mother's Touch</div>
             <p class="card-desc">An experimental project exploring the relationship between a mother and daughter, focusing on those vulnerable moments where one simply wants to be held. This project reflects the unspoken affection, the longing for comfort, and the universal human desire for warmth, even when it is not openly expressed.</p>
           </div>
@@ -235,8 +236,8 @@
     'sailing-club':  { imgs: [] },
     'hernan':        { imgs: Array.from({length:5},(_,i)=>`images/hernan-${i+1}.jpg`) },
     'sonder':        { imgs: [] },
-    'identity':      { imgs: ['images/identity-1.jpg.jpg','images/identity-2.jpg.jpg','images/identity-3.jpg.jpg','images/identity-4.jpg.jpg','images/identity-5.jpg.jpg'] },
-    'mothers-touch': { imgs: ['images/mothers-touch-1.jpg.jpg','images/mothers-touch-2.jpg.jpg','images/mothers-touch-3.jpg.jpg','images/mothers-touch-4.jpg.jpg'] },
+    'identity':      { imgs: Array.from({length:5},(_,i)=>`images/identity-${i+1}.jpg`) },
+    'mothers-touch': { imgs: Array.from({length:4},(_,i)=>`images/mothers-touch-${i+1}.jpg`) },
     'artists':       { imgs: ['images/artists-1.jpg','images/artists-2.jpg','images/artists-3.jpg','images/artists-4.jpg','images/artists-5.JPG','images/artists-6.JPG','images/artists-7.jpg','images/artists-8.jpg','images/artists-9.jpg','images/artists-10.jpg','images/artists-11.jpg'] }
   };
 

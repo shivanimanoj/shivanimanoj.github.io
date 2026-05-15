@@ -48,6 +48,7 @@
     .lb.open { display: flex; }
     .lb-inner { position: relative; width: 88vw; max-width: 980px; }
     .lb-inner img { width: 100%; max-height: 78vh; object-fit: contain; display: block; }
+    .lb-inner img.rotate90 { transform: rotate(90deg); max-height: 60vw; width: auto; margin: 0 auto; }
     .lb-close { position: absolute; top: -42px; right: 0; color: var(--mid); font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; cursor: pointer; border: none; background: none; }
     .lb-close:hover { color: white; }
     .lb-nav { display: flex; gap: 32px; margin-top: 18px; }
@@ -92,7 +93,7 @@
 
 <header>
   <div class="sig">
-    <img src="data:image/jpeg;base64,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" alt="Shivani Manoj" />
+    <img src="SHIVANI_LOGO-removebg-preview.png" alt="Shivani Manoj" />
   </div>
   <nav>
     <a href="#" onclick="showPage('portfolio')" id="nav-portfolio" class="active">Portfolio</a>
@@ -120,7 +121,7 @@
             <p class="card-desc">Our professor, Luca, generously allowed us to photograph his loft — a space built using materials collected after different shoots. The loft felt deeply authentic, filled with traces of everyday life. Through this project, I began to understand that imperfections and signs of daily life can give a space warmth, honesty, and character.</p>
           </div>
           <div class="card" onclick="openLb('sailing-club')">
-            <div class="card-img"><img src="images/lucas-home-5.jpg" alt="Sailing Club"/><div class="card-overlay"><span class="view-lbl">View Series</span></div></div>
+            <div class="card-img" style="background:var(--off);"><div class="card-overlay"><span class="view-lbl">Coming Soon</span></div></div>
             <div class="card-name">Sailing Club</div>
             <p class="card-desc">Part of the exhibition <em>El Mar, Sempre el Mar</em>, exhibited at Fundació Vila Casas by Master's students from ELISAVA. The atmosphere of the sailing centre constantly changed throughout the day — light, shadows, and movement all transformed the character of the space. This project taught me how observation and persistence can slowly reveal the deeper nature of a place.</p>
           </div>
@@ -140,7 +141,7 @@
             <p class="card-desc">One of my first projects in Barcelona, shortly after arriving as a newcomer. Hernan, the doorman of the building, quickly became a familiar presence. The morning greetings slowly created a sense of stability in an unfamiliar place. The aim was to understand Hernan more deeply — but in doing so, it also became a way of building a bond between us.</p>
           </div>
           <div class="card" onclick="openLb('sonder')">
-            <div class="card-img"><img src="images/hernan-3.jpg" alt="Sonder"/><div class="card-overlay"><span class="view-lbl">View Series</span></div></div>
+            <div class="card-img" style="background:var(--off);"><div class="card-overlay"><span class="view-lbl">Coming Soon</span></div></div>
             <div class="card-name">Sonder</div>
             <p class="card-desc">This project is based on delivery riders in Barcelona. Through conversations with several riders, I learned that the issue is not the job itself, but the way they are treated within it. In daily life, they are often reduced to the large delivery bags they carry, rather than being recognised as individuals. These small details reflect how inclusive or exclusive a society truly is.</p>
           </div>
@@ -184,7 +185,7 @@
   <div id="about" class="page">
     <div class="about">
       <div class="about-img">
-        <!-- Add your portrait photo: <img src="images/your-portrait.jpg" alt="Shivani Manoj" /> -->
+        <img src="images/profile-picture.jpeg" alt="Shivani Manoj" style="width:100%;height:100%;object-fit:cover;display:block;" />
       </div>
       <div style="padding-top:14px;">
         <div class="lbl">About</div>
@@ -201,14 +202,12 @@
     <div class="contact">
       <div class="sec-lbl">Get in touch</div>
       <div class="sec-title">Contact</div>
-      <p class="contact-sub">Available for commissions, collaborations,<br/>and editorial projects.</p>
       <div class="c-grid">
         <div class="c-row"><span class="c-lbl">Email</span><a href="mailto:shivani.manojkv@gmail.com" class="c-val">shivani.manojkv@gmail.com</a></div>
         <div class="c-row"><span class="c-lbl">Instagram</span><a href="https://www.instagram.com/shii__vaa__nii/" target="_blank" class="c-val">@shii__vaa__nii</a></div>
         <div class="c-row"><span class="c-lbl">LinkedIn</span><a href="https://www.linkedin.com/in/shivani-manoj-kv" target="_blank" class="c-val">shivani-manoj-kv</a></div>
         <div class="c-row"><span class="c-lbl">Phone — Barcelona</span><a href="tel:+34624954978" class="c-val">+34 624 954 978</a></div>
         <div class="c-row"><span class="c-lbl">Phone — Dubai</span><a href="tel:+971508948995" class="c-val">+971 50 894 8995</a></div>
-        <div class="c-row"><span class="c-lbl">Based in</span><span class="c-val">Barcelona, Spain</span></div>
       </div>
     </div>
   </div>
@@ -233,12 +232,12 @@
 <script>
   const SERIES = {
     'lucas-home':    { imgs: Array.from({length:19},(_,i)=>`images/lucas-home-${i+1}.jpg`) },
-    'sailing-club':  { imgs: [] }, // add sailing images when ready
+    'sailing-club':  { imgs: [] },
     'hernan':        { imgs: Array.from({length:5},(_,i)=>`images/hernan-${i+1}.jpg`) },
-    'sonder':        { imgs: [] }, // add sonder images when ready
+    'sonder':        { imgs: [] },
     'identity':      { imgs: Array.from({length:5},(_,i)=>`images/identity-${i+1}.jpg.jpg`) },
     'mothers-touch': { imgs: Array.from({length:4},(_,i)=>`images/mothers-touch-${i+1}.jpg.jpg`) },
-    'artists':       { imgs: Array.from({length:11},(_,i)=>`images/artists-${i+1}.jpg`) }
+    'artists':       { imgs: ['images/artists-1.jpg','images/artists-2.jpg','images/artists-3.jpg','images/artists-4.jpg','images/artists-5.JPG','images/artists-6.JPG','images/artists-7.jpg','images/artists-8.jpg','images/artists-9.jpg','images/artists-10.jpg','images/artists-11.jpg'] }
   };
 
   let curImgs = [], curIdx = 0;
@@ -251,7 +250,11 @@
     document.body.style.overflow = 'hidden';
   }
   function updateLb() {
-    document.getElementById('lb-img').src = curImgs[curIdx];
+    const img = document.getElementById('lb-img');
+    img.src = curImgs[curIdx];
+    // Rotate landscape artists images
+    const rotated = ['images/artists-10.jpg','images/artists-11.jpg'];
+    img.className = rotated.includes(curImgs[curIdx]) ? 'rotate90' : '';
     document.getElementById('lb-count').textContent = `${curIdx+1} / ${curImgs.length}`;
   }
   function nextImg() { curIdx = (curIdx+1) % curImgs.length; updateLb(); }

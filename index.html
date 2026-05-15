@@ -11,7 +11,7 @@
     html { scroll-behavior: smooth; }
     body { font-family: 'Jost', sans-serif; background: var(--white); color: var(--ink); font-weight: 300; letter-spacing: 0.02em; overflow-x: hidden; }
 
-    header { position: fixed; top: 0; left: 0; right: 0; z-index: 100; background: rgba(255,255,255,0.96); backdrop-filter: blur(8px); display: flex; flex-direction: column; align-items: center; padding: 22px 40px 14px; border-bottom: 1px solid var(--light); }
+    header { position: fixed; top: 0; left: 0; right: 0; z-index: 100; background: #ffffff; display: flex; flex-direction: column; align-items: center; padding: 22px 40px 14px; border-bottom: 1px solid var(--light); }
     .sig img { height: 120px; width: auto; display: block; mix-blend-mode: multiply; margin-bottom: 10px; }
     nav { display: flex; gap: 48px; }
     nav a { font-family: 'Jost', sans-serif; font-weight: 200; font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--accent); text-decoration: none; transition: color 0.25s; }
@@ -48,7 +48,7 @@
     .lb.open { display: flex; }
     .lb-inner { position: relative; width: 88vw; max-width: 980px; }
     .lb-inner img { width: 100%; max-height: 78vh; object-fit: contain; display: block; }
-    .lb-inner img.rotate90 { transform: rotate(180deg); }
+    .lb-inner img.rotate90 { transform: rotate(90deg); max-height: 55vw; width: auto; margin: 0 auto; display: block; }
     .lb-close { position: absolute; top: -42px; right: 0; color: var(--mid); font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; cursor: pointer; border: none; background: none; }
     .lb-close:hover { color: white; }
     .lb-nav { display: flex; gap: 32px; margin-top: 18px; }

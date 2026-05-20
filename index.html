@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Shivani Manoj — Photography</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300&family=Jost:wght@200;300;400&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root { --white: #ffffff; --off: #f7f5f2; --light: #ece9e4; --mid: #b0a89e; --ink: #1a1816; --accent: #8a7f74; }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Jost', sans-serif; background: var(--white); color: var(--ink); font-weight: 300; letter-spacing: 0.02em; overflow-x: hidden; }
+
+    header { position: fixed; top: 0; left: 0; right: 0; z-index: 100; background: #ffffff; display: flex; flex-direction: column; align-items: center; padding: 22px 40px 14px; border-bottom: 1px solid var(--light); }
+    .sig img { height: 120px; width: auto; display: block; mix-blend-mode: multiply; margin-bottom: 10px; }
+    nav { display: flex; gap: 48px; }
+    nav a { font-family: 'Jost', sans-serif; font-weight: 200; font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--accent); text-decoration: none; transition: color 0.25s; }
+    nav a:hover, nav a.active { color: var(--ink); }
+
+    main { padding-top: 138px; }
+    .page { display: none; }
+    .page.active { display: block; }
+
+    /* PORTFOLIO */
+    .port { padding: 60px 60px 100px; }
+    .cat { margin-bottom: 88px; }
+    .cat-head { display: flex; align-items: baseline; gap: 20px; margin-bottom: 34px; padding-bottom: 14px; border-bottom: 1px solid var(--light); }
+    .cat-name { font-family: 'Cormorant Garamond', serif; font-weight: 300; font-size: 25px; letter-spacing: 0.08em; }
+    .cat-count { font-size: 10px; letter-spacing: 0.2em; color: var(--mid); text-transform: uppercase; }
+    .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(340px, 1fr)); gap: 40px 50px; }
+
+    .card { cursor: pointer; }
+    .card-img { width: 100%; aspect-ratio: 4/3; overflow: hidden; position: relative; background: var(--off); }
+    .card-img img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 0.5s ease; }
+    .card:hover .card-img img { transform: scale(1.03); }
+    .card-overlay { position: absolute; inset: 0; background: rgba(0,0,0,0); transition: background 0.3s; display: flex; align-items: center; justify-content: center; }
+    .card:hover .card-overlay { background: rgba(0,0,0,0.12); }
+    .view-lbl { color: white; font-size: 10px; letter-spacing: 0.25em; text-transform: uppercase; opacity: 0; transition: opacity 0.3s; }
+    .card:hover .view-lbl { opacity: 1; }
+    .card-name { font-family: 'Cormorant Garamond', serif; font-size: 18px; letter-spacing: 0.06em; margin: 16px 0 10px; }
+    .card-desc { font-size: 12.5px; line-height: 1.85; color: var(--accent); max-width: 440px; }
+
+    .artists-card .card-img { aspect-ratio: 21/9; }
+    .artists-card .card-desc { max-width: 700px; }
+
+    /* LIGHTBOX */
+    .lb { display: none; position: fixed; inset: 0; z-index: 999; background: rgba(12,10,9,0.96); align-items: center; justify-content: center; flex-direction: column; }
+    .lb.open { display: flex; }
+    .lb-inner { position: relative; width: 88vw; max-width: 980px; }
+    .lb-inner img { width: 100%; max-height: 78vh; object-fit: contain; display: block; }
+    .lb-close { position: absolute; top: -42px; right: 0; color: var(--mid); font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; cursor: pointer; border: none; background: none; }
+    .lb-close:hover { color: white; }
+    .lb-nav { display: flex; gap: 32px; margin-top: 18px; }
+    .lb-nav button { background: none; border: none; color: var(--mid); font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; cursor: pointer; padding: 8px 0; }
+    .lb-nav button:hover { color: white; }
+    .lb-count { color: var(--mid); font-size: 10px; letter-spacing: 0.15em; margin-top: 10px; }
+
+    /* ABOUT */
+    .about { padding: 60px 60px 100px; display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: start; max-width: 1100px; margin: 0 auto; }
+    .about-img { width: 100%; aspect-ratio: 3/4; background: linear-gradient(160deg, #ece9e4 0%, #d5cfc8 100%); }
+    .about-img img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .lbl { font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--mid); margin-bottom: 10px; }
+    .about-name { font-family: 'Cormorant Garamond', serif; font-weight: 300; font-size: 38px; letter-spacing: 0.04em; line-height: 1.1; margin-bottom: 26px; }
+    .about-p { font-size: 13.5px; line-height: 2; color: var(--accent); margin-bottom: 18px; }
+
+    /* CONTACT */
+    .contact { padding: 60px 60px 120px; max-width: 540px; margin: 0 auto; text-align: center; }
+    .sec-lbl { font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--mid); margin-bottom: 8px; }
+    .sec-title { font-family: 'Cormorant Garamond', serif; font-weight: 300; font-size: 32px; letter-spacing: 0.06em; margin-bottom: 14px; }
+    .contact-sub { font-size: 13px; color: var(--accent); line-height: 1.8; margin-bottom: 46px; }
+    .c-grid { border-top: 1px solid var(--light); }
+    .c-row { display: flex; justify-content: space-between; align-items: center; padding: 20px 0; border-bottom: 1px solid var(--light); }
+    .c-lbl { font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--mid); }
+    .c-val { font-family: 'Cormorant Garamond', serif; font-size: 16px; color: var(--ink); text-decoration: none; transition: color 0.2s; }
+    .c-val:hover { color: var(--accent); }
+
+    footer { text-align: center; padding: 26px; font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--mid); border-top: 1px solid var(--light); }
+
+    .fi { opacity: 0; transform: translateY(16px); transition: opacity 0.6s ease, transform 0.6s ease; }
+    .fi.vis { opacity: 1; transform: translateY(0); }
+
+    @media (max-width: 768px) {
+      header { padding: 16px 20px 12px; }
+      nav { gap: 24px; }
+      .port, .contact { padding: 50px 20px 80px; }
+      .about { grid-template-columns: 1fr; gap: 32px; padding: 50px 20px 80px; }
+      .grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="sig">
+    <img src="images/shivani-logo.png" alt="Shivani Manoj" />
+  </div>
+  <nav>
+    <a href="#" onclick="showPage('portfolio')" id="nav-portfolio" class="active">Portfolio</a>
+    <a href="#" onclick="showPage('about')" id="nav-about">About</a>
+    <a href="#" onclick="showPage('contact')" id="nav-contact">Contact</a>
+  </nav>
+</header>
+
+<main>
+
+  <!-- PORTFOLIO -->
+  <div id="portfolio" class="page active">
+    <div class="port">
+
+      <!-- Exhibition -->
+      <div class="cat fi">
+        <div class="cat-head">
+          <span class="cat-name">Exhibition</span>
+          <span class="cat-count">02 projects</span>
+        </div>
+        <div class="grid">
+          <div class="card" onclick="openLb('identity')">
+            <div class="card-img"><img src="images/identity-1.jpg" alt="Fine Art Igualada"/><div class="card-overlay"><span class="view-lbl">View Series</span></div></div>
+            <div class="card-name">Fine Art Igualada</div>
+            <p class="card-desc">Explored identity through the theme <em>Espejos</em>, the project moves across the different stages of a man's life. It reflects on identity not as something fixed, but as something continuously shaped by time, experience, and transition. The work was presented during the 14th edition of FineArt Igualada, a festival centered on photography as a tool for community and social connection.</p>
+          </div>
+          <div class="card" onclick="openLb('sailing-club')">
+            <div class="card-img" style="background:var(--off);"><div class="card-overlay"><span class="view-lbl">Coming Soon</span></div></div>
+            <div class="card-name">Can Framis Museum Barcelona</div>
+            <p class="card-desc"><em>El mar, sempre el mar</em> is a physical and online installation conceived and produced for the Can Framis Museum by students of the ELISAVA Master in Photography and Design (2025–2026), in collaboration with the Fundació Vila Casas. Bringing together seventeen photographers from twelve countries, the project traces the pulse, characters, and diversity of the Poblenou coastline. The team I belonged to focused on the Centre Municipal de Vela de Barcelona, a sailing and water sports club on Barcelona's beachfront. To explore the project further, visit <a href="https://sempreelmar.com/en/" target="_blank" style="color:var(--accent);text-decoration:underline;">sempreelmar.com</a></p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Social Narratives -->
+      <div class="cat fi">
+        <div class="cat-head">
+          <span class="cat-name">Social Narratives</span>
+          <span class="cat-count">02 projects</span>
+        </div>
+        <div class="grid">
+          <div class="card" onclick="openLb('sonder')">
+            <div class="card-img" style="background:var(--off);"><div class="card-overlay"><span class="view-lbl">Coming Soon</span></div></div>
+            <div class="card-name">Sonder</div>
+            <p class="card-desc">Developed as my final project, this work focuses on delivery riders in Barcelona. Through conversations with several riders, I learned that the issue is not the job itself, but the way they are treated within it. In everyday life, they are often reduced to the large delivery bags they carry, rather than being recognised as individuals. These small but telling details reveal how inclusive or exclusive a society can be.</p>
+          </div>
+          <div class="card" onclick="openLb('hernan')">
+            <div class="card-img"><img src="images/hernan-1.jpg" alt="Hernan"/><div class="card-overlay"><span class="view-lbl">View Series</span></div></div>
+            <div class="card-name">Hernan</div>
+            <p class="card-desc">One of my first projects in Barcelona, shortly after arriving as a newcomer. Hernan, the doorman of the building, quickly became a familiar presence. The morning greetings slowly created a sense of stability in an unfamiliar place. The aim was to understand Hernan more deeply — but in doing so, it also became a way of building a bond between us.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Space and Details -->
+      <div class="cat fi">
+        <div class="cat-head">
+          <span class="cat-name">Space and Details</span>
+          <span class="cat-count">02 projects</span>
+        </div>
+        <div class="grid">
+          <div class="card" onclick="openLb('lucas-home')">
+            <div class="card-img"><img src="images/lucas-home-1.jpg" alt="Lucas Home"/><div class="card-overlay"><span class="view-lbl">View Series</span></div></div>
+            <div class="card-name">Lucas Home</div>
+            <p class="card-desc">Our professor, Luca, generously allowed us to photograph his loft — a space built using materials collected after different shoots. The loft felt deeply authentic, filled with traces of everyday life. Through this project, I began to understand that imperfections and signs of daily life can give a space warmth, honesty, and character.</p>
+          </div>
+          <div class="card" onclick="openLb('sailing-club-space')">
+            <div class="card-img" style="background:var(--off);"><div class="card-overlay"><span class="view-lbl">Coming Soon</span></div></div>
+            <div class="card-name">Sailing Club</div>
+            <p class="card-desc">Part of the exhibition <em>El mar, sempre el mar</em>, exhibited at the Fundació Vila Casas, this is an extension of my exploration of space. The atmosphere of the sailing centre constantly changed throughout the day, with light, shadows, and movement continuously transforming the character of the place. This project taught me how observation and persistence can gradually reveal the deeper nature of a space.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Conceptual Work -->
+      <div class="cat fi">
+        <div class="cat-head">
+          <span class="cat-name">Conceptual Work</span>
+          <span class="cat-count">01 project</span>
+        </div>
+        <div class="grid">
+          <div class="card" onclick="openLb('mothers-touch')">
+            <div class="card-img"><img src="images/mothers-touch-1.jpg" alt="Mother's Touch"/><div class="card-overlay"><span class="view-lbl">View Series</span></div></div>
+            <div class="card-name">Mother's Touch</div>
+            <p class="card-desc">An experimental project exploring the relationship between a mother and daughter, focusing on those vulnerable moments where one simply wants to be held. This project reflects the unspoken affection, the longing for comfort, and the universal human desire for warmth, even when it is not openly expressed.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Artists -->
+      <div class="cat fi">
+        <div class="cat-head"><span class="cat-name">Artists</span></div>
+        <div class="card artists-card" onclick="openLb('artists')">
+          <div class="card-img"><img src="images/artists-1.jpg" alt="Artists"/><div class="card-overlay"><span class="view-lbl">View Series</span></div></div>
+          <div class="card-name">Artists</div>
+          <p class="card-desc">Barcelona is a city where creativity flows freely, drawing artists from all corners of the world who come to grow, create, and be seen. This ongoing series documents artists living and working here — ballet dancers, musicians, and models, some born in the city, others who migrated in pursuit of their craft. Each portrait explores the dedication behind the art, captured through full-body frames that honour their presence and close details that reveal the texture of their practice.</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ABOUT -->
+  <div id="about" class="page">
+    <div class="about">
+      <div class="about-img">
+        <img src="images/profile-picture.jpeg" alt="Shivani Manoj" style="width:100%;height:100%;object-fit:cover;display:block;" />
+      </div>
+      <div style="padding-top:14px;">
+        <div class="lbl">About</div>
+        <div class="about-name">Hi, I'm<br/>Shivani</div>
+        <p class="about-p">With a foundation in interior design, I developed a strong sensitivity to space, composition, and visual harmony, which gradually led me into the field of photography. My practice is rooted in exploring different genres, unified by a consistent focus on storytelling as the central visual language.</p>
+        <p class="about-p">Each project is approached as a process of observing, composing, narrating, and refining, allowing the final image to communicate intention, detail, and meaning with clarity.</p>
+        <p class="about-p">I hold a Master's degree in Photography and Design from Elisava, Barcelona, where I further refined both my conceptual approach and technical skills.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- CONTACT -->
+  <div id="contact" class="page">
+    <div class="contact">
+      <div class="sec-lbl">Get in touch</div>
+      <div class="sec-title">Contact</div>
+      <div class="c-grid">
+        <div class="c-row"><span class="c-lbl">Email</span><a href="mailto:shivani.manojkv@gmail.com" class="c-val">shivani.manojkv@gmail.com</a></div>
+        <div class="c-row"><span class="c-lbl">Instagram</span><a href="https://www.instagram.com/shii__vaa__nii/" target="_blank" class="c-val">@shii__vaa__nii</a></div>
+        <div class="c-row"><span class="c-lbl">LinkedIn</span><a href="https://www.linkedin.com/in/shivani-manoj-kv" target="_blank" class="c-val">shivani-manoj-kv</a></div>
+        <div class="c-row"><span class="c-lbl">Phone — Barcelona</span><a href="tel:+34624954978" class="c-val">+34 624 954 978</a></div>
+        <div class="c-row"><span class="c-lbl">Phone — Dubai</span><a href="tel:+971508948995" class="c-val">+971 50 894 8995</a></div>
+      </div>
+    </div>
+  </div>
+
+</main>
+
+<footer>© 2026 Shivani Manoj — All rights reserved</footer>
+
+<!-- LIGHTBOX -->
+<div class="lb" id="lb" onclick="lbOutside(event)">
+  <div class="lb-inner">
+    <button class="lb-close" onclick="closeLb()">✕ Close</button>
+    <img id="lb-img" src="" alt="" />
+  </div>
+  <div class="lb-nav">
+    <button onclick="prevImg()">← Previous</button>
+    <button onclick="nextImg()">Next →</button>
+  </div>
+  <div class="lb-count" id="lb-count"></div>
+</div>
+
+<script>
+  const SERIES = {
+    'lucas-home':    { imgs: ['images/lucas-home-1.jpg','images/lucas-home-2.jpg','images/lucas-home-3.jpg','images/lucas-home-4.jpg','images/lucas-home-5.jpg','images/lucas-home-6.jpg','images/lucas-home-7.jpg','images/lucas-home-8.jpg','images/lucas-home-9.jpg','images/lucas-home-10.jpg','images/lucas-home-11.jpg','images/lucas-home-12.jpg','images/lucas-home-13.jpg','images/lucas-home-14.jpg','images/lucas-home-15.jpg','images/lucas-home-16.jpg','images/lucas-home-17.jpg','images/lucas-home-18.jpg','images/lucas-home-19.jpg'] },
+    'sailing-club':  { imgs: [] },
+    'sailing-club-space': { imgs: [] },
+    'hernan':        { imgs: Array.from({length:5},(_,i)=>`images/hernan-${i+1}.jpg`) },
+    'sonder':        { imgs: [] },
+    'identity':      { imgs: Array.from({length:5},(_,i)=>`images/identity-${i+1}.jpg`) },
+    'mothers-touch': { imgs: Array.from({length:4},(_,i)=>`images/mothers-touch-${i+1}.jpg`) },
+    'artists':       { imgs: ['images/artists-1.jpg','images/artists-2.jpg','images/artists-3.jpg','images/artists-4.jpg','images/artists-5.JPG','images/artists-6.JPG','images/artists-7.jpg','images/artists-8.jpg','images/artists-9.jpg','images/artists-10.jpg','images/artists-11.jpg'] }
+  };
+
+  let curImgs = [], curIdx = 0;
+
+  function openLb(name) {
+    curImgs = SERIES[name].imgs;
+    if (!curImgs.length) return;
+    curIdx = 0; updateLb();
+    document.getElementById('lb').classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+  function updateLb() {
+    const img = document.getElementById('lb-img');
+    img.src = curImgs[curIdx];
+    img.className = '';
+    document.getElementById('lb-count').textContent = `${curIdx+1} / ${curImgs.length}`;
+  }
+  function nextImg() { curIdx = (curIdx+1) % curImgs.length; updateLb(); }
+  function prevImg() { curIdx = (curIdx-1+curImgs.length) % curImgs.length; updateLb(); }
+  function closeLb() { document.getElementById('lb').classList.remove('open'); document.body.style.overflow=''; }
+  function lbOutside(e) { if(e.target===document.getElementById('lb')) closeLb(); }
+  document.addEventListener('keydown', e => {
+    if (!document.getElementById('lb').classList.contains('open')) return;
+    if (e.key==='ArrowRight') nextImg();
+    if (e.key==='ArrowLeft') prevImg();
+    if (e.key==='Escape') closeLb();
+  });
+
+  function showPage(id) {
+    document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+    document.querySelectorAll('nav a').forEach(a=>a.classList.remove('active'));
+    document.getElementById(id).classList.add('active');
+    document.getElementById('nav-'+id).classList.add('active');
+    window.scrollTo({top:0,behavior:'smooth'});
+    setTimeout(fade, 100);
+  }
+
+  function fade() {
+    const obs = new IntersectionObserver(entries=>{
+      entries.forEach((e,i)=>{ if(e.isIntersecting) setTimeout(()=>e.target.classList.add('vis'), i*120); });
+    },{threshold:0.08});
+    document.querySelectorAll('.fi').forEach(el=>obs.observe(el));
+  }
+  fade();
+</script>
+</body>
+</html>
